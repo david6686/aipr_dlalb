@@ -46,7 +46,7 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     apt-get update  --fix-missing && \
     DEBIAN_FRONTEND=noninteractive  $APT_INSTALL software-properties-common && \
     add-apt-repository ppa:kelleyk/emacs &&\
-    apt-get update \
+    apt-get update --fix-missing \
     && \
 
 # ==================================================================
@@ -73,7 +73,7 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
         grep \
         gzip \
         htop \
-        language-pack-en-base \
+        #language-pack-en-base \
         language-pack-zh-hant \
         language-pack-zh-hant-base \
         libgl1-mesa-glx \
@@ -237,10 +237,10 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
 
 
 # Allow OpenSSH to talk to containers without asking for confirmation
-    cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_config.new && \
-    echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config.new && \
-    mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config  \
-    && \
+#    cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_config.new && \
+#    echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config.new && \
+#    mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config  \
+#    && \
 # ==================================================================
 # config & cleanup
 # ------------------------------------------------------------------
