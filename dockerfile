@@ -109,7 +109,7 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
 # miniconda3
 # ------------------------------------------------------------------ 
     #install miniconda3
-    wget https://repo.continuum.io/miniconda/Miniconda3-4.7.12-Linux-x86_64.sh -O ~/miniconda.sh && \
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
     /opt/conda/bin/conda clean -tipsy && \
@@ -134,7 +134,7 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     torchvision \
     imgaug \
     onnx \
-    cntk-gpu \
+    # cntk-gpu \
 #     tensorflowjs \
     && \
 # ================================================================== 
@@ -166,7 +166,7 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     scipy \
     theano \
     protobuf \
-    libprotobuf=3.2.0 \
+    libprotobuf \
     && \
     conda install -c conda-forge jupyterlab \
     && \
