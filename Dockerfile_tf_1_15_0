@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 # FROM nvidia/cuda:9.0-devel-ubuntu16.04
 MAINTAINER Silentink (https://gitlab.com/david6686/aipr_dllab)
 # ==================================================================
