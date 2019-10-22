@@ -22,7 +22,8 @@ ENV TENSORFLOW_VERSION=2.0.0
 # ENV NCCL_VERSION=2.2.13-1+cuda9.0
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 
 ENV PATH /opt/conda/bin:$PATH
-ENV TINI_VERSION v0.18.0 
+ENV TINI_VERSION 0.18.0 
+# ENV TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` 
 ENV SHELL /usr/bin/fish
 # ENV UHOME="/home/emacs"
 # Default fonts
@@ -30,7 +31,7 @@ ENV NNG_URL="https://github.com/google/fonts/raw/master/ofl/\
 nanumgothic/NanumGothic-Regular.ttf" \
     SCP_URL="https://github.com/adobe-fonts/source-code-pro/\
 archive/2.030R-ro/1.050R-it.tar.gz"
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
+ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /usr/bin/tini
 # ==================================================================
 # startup setup
 # ------------------------------------------------------------------
@@ -45,7 +46,6 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     apt-get update  --fix-missing && \
     DEBIAN_FRONTEND=noninteractive  $APT_INSTALL software-properties-common && \
     add-apt-repository ppa:kelleyk/emacs &&\
-    # chmod +x /tini &&\
     apt-get update \
     && \
 
@@ -63,28 +63,37 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
         curl \
         dbus-x11 \
         doxygen \
+        dpkg \
         emacs25 \
         figlet \
         firefox \
         fish \
         fontconfig \
         git \
+        grep \
         gzip \
         htop \
         language-pack-en-base \
         language-pack-zh-hant \
         language-pack-zh-hant-base \
         libgl1-mesa-glx \
+        libglib2.0-0 \
         libjpeg-dev\
         libpng-dev \
         libprotoc-dev \
+        libsm6 \
+        libxext6 \
+        libxrender1 \
+        mercurial \
         nano \
         protobuf-compiler \
         pv \
         rar \
         rlwrap \
+        sed \
         silversearcher-ag \
         software-properties-common \
+        subversion \
         sudo \
         tar \
         tmux \
@@ -105,11 +114,12 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     #setup autojump
     echo 'source /usr/share/autojump/autojump.bash' >>~/.bash_profile \
         && \
+
 # ==================================================================
 # miniconda3
 # ------------------------------------------------------------------ 
     #install miniconda3
-    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+    wget --quiet https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
     /opt/conda/bin/conda clean -tipsy && \
