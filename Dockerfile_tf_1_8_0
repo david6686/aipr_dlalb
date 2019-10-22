@@ -7,17 +7,15 @@ MAINTAINER Silentink (https://gitlab.com/david6686/aipr_dllab)
 # python        3.7    (conda)
 # jupyter       latest (pip)
 # pytorch       latest  (pip)
-# tensorflow    1.8.0 (pip)
-# tensorflow-gpu    1.8.0 (pip)
-# tensorflowjs    1.8.0 (latest)
+# tensorflow    1.14.0 (pip)
+# tensorflow-gpu    1.14.0 (pip)
 # theano        1.0.1  (conda)
 # keras         latest (pip)
 # opencv        latest  (conda)
-# tensorflow.js latest (pip)
 # onnx          latest (pip)
 # cntk          latest (pip)
 # ==================================================================
-ENV TENSORFLOW_VERSION=1.8.0
+ENV TENSORFLOW_VERSION=1.14.0
 # ENV CUDNN_VERSION=7.0.5.15-1+cuda9.0
 # ENV NCCL_VERSION=2.2.13-1+cuda9.0
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 
