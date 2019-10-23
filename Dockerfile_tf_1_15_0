@@ -31,6 +31,8 @@ ENV NNG_URL="https://github.com/google/fonts/raw/master/ofl/\
 nanumgothic/NanumGothic-Regular.ttf" \
     SCP_URL="https://github.com/adobe-fonts/source-code-pro/\
 archive/2.030R-ro/1.050R-it.tar.gz"
+ENV TZ=Asia/Taipei
+
 ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /usr/bin/tini
 # ==================================================================
 # startup setup
@@ -247,6 +249,8 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     #fish setup
     sed -i -e "s/bin\/ash/usr\/bin\/fish/" /etc/passwd  && \
     ldconfig && \
+    #設定時區 
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     apt-get clean && \
     apt-get autoremove && \
     chmod +x /usr/bin/tini && \
