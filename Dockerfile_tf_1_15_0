@@ -146,6 +146,7 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     torchvision \
     imgaug \
     onnx \
+    xgboost \
     # cntk-gpu \
 #     tensorflowjs \
     && \
