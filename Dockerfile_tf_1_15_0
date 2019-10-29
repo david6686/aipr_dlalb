@@ -97,6 +97,7 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
         software-properties-common \
         subversion \
         sudo \
+        snap \
         tar \
         tmux \
         unrar \ 
@@ -105,6 +106,8 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
         wget \
         zip \
         && \
+    # snap install pycharm
+    snap install pycharm-community && \
     # set font
     mkdir -p /usr/local/share/fonts \
     && wget -qO- "${SCP_URL}" | tar xz -C /usr/local/share/fonts \
