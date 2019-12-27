@@ -23,6 +23,7 @@ ENV TENSORFLOW_VERSION=1.15.0
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 
 ENV PATH /opt/conda/bin:$PATH
 ENV TINI_VERSION 0.18.0 
+ENV MXNET_BUILD_OPTS "USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1"
 # ENV TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` 
 ENV SHELL /usr/bin/fish
 # ENV UHOME="/home/emacs"
@@ -78,6 +79,13 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
         #language-pack-en-base \
         language-pack-zh-hant \
         language-pack-zh-hant-base \
+        #####################################################################
+        # install for mxnet
+        libatlas-base-dev \
+        libopencv-dev \
+        libcurl4-openssl-dev \ 
+        libgtest-dev \
+        ##############################
         libgl1-mesa-glx \
         libglib2.0-0 \
         libjpeg-dev\
@@ -106,6 +114,18 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
         wget \
         zip \
         && \
+    ########################install for mxnet 
+    cd /usr/src/gtest &&\
+    cmake CMakeLists.txt && \
+    make && \
+    cp *.a /usr/lib && \
+    cd / &&\
+    git clone --recursive https://github.com/dmlc/mxnet &&\
+    cd mxnet && \
+    make -j$(nproc) $MXNET_BUILD_OPTS && \
+    cd / \
+    && \
+    ###########################
     # snap install pycharm
     # snap install pycharm-community && \
     # set font
@@ -153,6 +173,7 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     # cntk-gpu \
 #     tensorflowjs \
     && \
+
 # ================================================================== 
 # intelpython-full 
 # ------------------------------------------------------------------  
@@ -184,8 +205,10 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     protobuf \
     libprotobuf \
     flask \
+    
     && \
-    conda install -c conda-forge jupyterlab \
+    conda install -c conda-forge jupyterlab &&\
+    conda install -c conda-forge pycocotools \
     && \
 # ==================================================================
 # boost
