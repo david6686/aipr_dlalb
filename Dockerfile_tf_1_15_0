@@ -170,6 +170,7 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     imgaug \
     onnx \
     xgboost \
+    mxnet-cu101 \
     # cntk-gpu \
 #     tensorflowjs \
     && \
